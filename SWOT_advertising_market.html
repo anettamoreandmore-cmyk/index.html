@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SWOT-анализ рынка рекламы РФ — 2026</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080d1c;
+      --surface: #111b31;
+      --text: #f5f7ff;
+      --muted: #aab6cb;
+      --s: #44d6a7;
+      --w: #ffbf72;
+      --o: #8aa8ff;
+      --t: #ff7b91;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, "Segoe UI", Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    .wrap {
+      width: min(1200px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* Градиентный заголовок */
+    .hero {
+      padding: 76px 0 43px;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 6.2vw, 5.45rem);
+      line-height: 1.06;
+      letter-spacing: -0.055em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(
+        105deg,
+        #ffffff 4%,
+        #c1ccff 40%,
+        #70ead7 88%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      max-width: 850px;
+      color: var(--muted);
+      font-size: 1.2rem;
+    }
+
+    /* Ключевые показатели */
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 13px;
+      margin: 35px 0 52px;
+    }
+
+    .metric {
+      background: linear-gradient(
+        155deg,
+        #1e2c4b,
+        #0f192d
+      );
+      border: 1px solid rgba(183, 205, 240, .15);
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .metric .value {
+      font-size: 2rem;
+      font-weight: 850;
+    }
+
+    /* SWOT-сетка */
+    .swot-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .panel {
+      --accent: #8aa8ff;
+      position: relative;
+      padding: 29px;
+      border-radius: 22px;
+      background: linear-gradient(
+        155deg,
+        #17233c,
+        #0e172a
+      );
+      border: 1px solid rgba(183, 205, 240, .15);
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(
+        90deg,
+        var(--accent),
+        transparent
+      );
+    }
+
+    .panel.s { --accent: var(--s); }
+    .panel.w { --accent: var(--w); }
+    .panel.o { --accent: var(--o); }
+    .panel.t { --accent: var(--t); }
+
+    /* Анимированные карточки */
+    .skill-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .skill {
+      background: rgba(255, 255, 255, .028);
+      border: 1px solid rgba(196, 211, 237, .1);
+      padding: 18px;
+      border-radius: 15px;
+      transition:
+        transform .28s ease,
+        border-color .28s ease,
+        box-shadow .28s ease;
+    }
+
+    .skill:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 15px 24px rgba(0, 0, 0, .18);
+    }
+
+    .skill h4 {
+      margin: 0 0 9px;
+      font-size: 1rem;
+    }
+
+    .skill p {
+      color: #bec9da;
+      font-size: .91rem;
+    }
+
+    .source {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* Примеры кейсов */
+    .cases {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .case {
+      padding: 23px;
+      border-radius: 17px;
+      background: linear-gradient(
+        160deg,
+        #172641,
+        #101a30
+      );
+      border: 1px solid rgba(183, 205, 240, .15);
+    }
+
+    /* Теги инструментов */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(79, 115, 187, .11);
+      border: 1px solid rgba(127, 163, 238, .28);
+      color: #d9e5ff;
+      transition: transform .2s;
+    }
+
+    .tag:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Появление при прокрутке */
+    .reveal {
+      opacity: 0;
+      transform: translateY(15px);
+      transition:
+        opacity .6s ease,
+        transform .6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 960px) {
+      .metrics {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cases {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 740px) {
+      .swot-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .panel {
+        padding: 21px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .wrap {
+        width: calc(100% - 28px);
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="hero wrap">
+    <h1>
+      <span class="gradient-text">SWOT-анализ</span>
+      <br>рынка рекламы РФ
+    </h1>
+
+    <p class="lead">
+      Системная оценка сильных и слабых сторон
+      рекламной отрасли, возможностей роста
+      и внешних угроз.
+    </p>
+
+    <p>Актуально на 8 ноября 2026 года</p>
+  </header>
+
+  <main class="wrap">
+
+    <section class="metrics">
+      <article class="metric reveal">
+        <div class="value">981,6 млрд ₽</div>
+        <p>Рекламные бюджеты в медиа — 2025 год</p>
+      </article>
+
+      <article class="metric reveal">
+        <div class="value">+8,5%</div>
+        <p>Рост рекламного рынка — 2025 год</p>
+      </article>
+    </section>
+
+    <section class="swot-grid" id="analysis">
+
+      <article class="panel s reveal">
+        <h2>S — Сильные стороны</h2>
+        <div class="skill-list">
+          <div class="skill">
+            <h4>Крупный объём рынка</h4>
+            <p>
+              По оценке АКАР, рекламные бюджеты
+              в медиа за 2025 год составили
+              981,6 млрд руб., увеличившись на 8,5%.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel w reveal">
+        <h2>W — Слабые стороны</h2>
+        <div class="skill-list">
+          <div class="skill">
+            <h4>Несопоставимость статистики</h4>
+            <p>
+              АКАР и АРИР используют разные
+              границы рынка и классификации.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel o reveal">
+        <h2>O — Возможности</h2>
+        <div class="skill-list">
+          <div class="skill">
+            <h4>Развитие retail media</h4>
+            <p>
+              В 2025 году сегмент достиг
+              580 млрд руб., увеличившись на 58%.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel t reveal">
+        <h2>T — Угрозы</h2>
+        <div class="skill-list">
+          <div class="skill">
+            <h4>Замедление роста рынка</h4>
+            <p>
+              Рост рынка замедлился с 24%
+              в 2024 году до 8,5% в 2025 году.
+            </p>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <section>
+      <h2>Инструменты и каналы</h2>
+      <div class="tags">
+        <span class="tag">Performance</span>
+        <span class="tag">Retail media</span>
+        <span class="tag">Онлайн-видео</span>
+        <span class="tag">Connected TV</span>
+        <span class="tag">Digital Out-of-Home</span>
+        <span class="tag">Медиапланирование</span>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    (() => {
+      const items = document.querySelectorAll('.reveal');
+
+      if (!('IntersectionObserver' in window)) {
+        items.forEach(el => el.classList.add('visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+
+      items.forEach(el => observer.observe(el));
+    })();
+  </script>
+</body>
+</html>
